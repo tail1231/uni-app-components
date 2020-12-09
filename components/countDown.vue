@@ -6,7 +6,7 @@
 
 <script>
 	import moment from 'moment'
-	let dateFormat = "YYYY-MM-DD";
+	let dateFormat = "YYYY-MM-DD HH:mm:ss";
 	export default {
 		props: {
 			time: {
@@ -28,9 +28,8 @@
 		},
 		created() {
 			// this.startTime = moment(this.time[0]);
-			this.startTime = moment();
-			this.endTime = moment(this.time[1]);
-			console.log('time', moment(this.time[0], dateFormat))
+			this.startTime = moment().format(dateFormat);
+			this.endTime = moment(this.time[1]).format(dateFormat);
 			this.timer = setInterval(() => {
 				this.leftTime = this.leftDay()
 			}, 1000);
@@ -39,6 +38,7 @@
 			leftDay() {
 				const start = this.startTime;
 				const end = this.endTime;
+				console.log(start,end)
 				if (start >= end) {
 					if (this.timer) clearInterval(this.timer)
 					return {
@@ -49,10 +49,10 @@
 					};
 				}
 				// console.log(moment(endTime).format("YYYY-MM-DD HH:mm:ss"));
-				const d = end.diff(start, "day");
-				const h = end.diff(start, "hour");
-				const m = end.diff(start, "minute");
-				const s = end.diff(start, "second");
+				const d = moment(end).diff(moment(start), "day");
+				const h = moment(end).diff(moment(start), "hour");
+				const m = moment(end).diff(moment(start), "minute");
+				const s = moment(end).diff(moment(start), "second");
 				console.log('计时', `${ d}${ h - 24 * d } ${m - 60 * h} ${ s - 60 * m}`)
 				return {
 					d,
