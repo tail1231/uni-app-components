@@ -1,1 +1,1 @@
-<view>{{''+(leftTime.d+'天 '+leftTime.h+'时 '+leftTime.m+'分 '+leftTime.s+'秒')+''}}</view>
+<view>{{''+cutDown+''}}</view>

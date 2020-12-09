@@ -1,6 +1,6 @@
 <template>
 	<view>
-		{{`${leftTime.d}天 ${leftTime.h}时 ${leftTime.m}分 ${leftTime.s}秒`}}
+		{{cutDown}}
 	</view>
 </template>
 
@@ -23,22 +23,26 @@
 					h: 0,
 					m: 0,
 					s: 0
-				}
+				},
+				cutDown: ""
 			};
 		},
 		created() {
-			// this.startTime = moment(this.time[0]);
-			this.startTime = moment().format(dateFormat);
-			this.endTime = moment(this.time[1]).format(dateFormat);
-			this.timer = setInterval(() => {
-				this.leftTime = this.leftDay()
-			}, 1000);
+			setInterval(() => {
+				let start = moment(new Date()); //获取开始时间
+				let end = moment(new Date("2020/12/10")); //结束时间
+				let diff = end.diff(start); //时间差
+				let time =
+					`${end.diff(start,'day')}天${moment.duration(diff).hours()}小时${moment.duration(diff).minutes()}分${moment.duration(diff).seconds()}秒` //格式化为需要的格式 这里是时分秒
+				this.cutDown = time
+				console.log(time)
+			}, 1000)
 		},
 		methods: {
 			leftDay() {
 				const start = this.startTime;
 				const end = this.endTime;
-				console.log(start,end)
+				console.log(start, end)
 				if (start >= end) {
 					if (this.timer) clearInterval(this.timer)
 					return {
