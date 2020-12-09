@@ -1,0 +1,1 @@
+<view><count-down vue-id="564a3e9c-1" time="{{timeArr}}" bind:__l="__l"></count-down></view>
