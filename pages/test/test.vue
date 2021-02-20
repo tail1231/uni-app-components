@@ -1,6 +1,6 @@
 <template>
 	<view class="test">
-		<view class="title">margin轮播</view>
+		<!-- <view class="title">margin轮播</view> -->
 		<view class="margin-swiper">
 			<margin-swiper></margin-swiper>
 		</view>
